@@ -3,3 +3,16 @@
   display: grid;
   grid-template-columns: auto auto auto;
 }
+
+.last-saved-text {
+  text-align: right;
+  padding: 10px 30px;
+  font-style: italic;
+  font-size: 14px;
+}
+
+@media screen and (max-width: 667px) {
+  .images-grid {
+    grid-template-columns: auto auto;
+  }
+}
