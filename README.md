@@ -1,4 +1,6 @@
-# Getting Started
+# Drag and Drop
+
+See live here, https://techsavvysaahil.github.io/drag-and-drop/
 
 1. You will see the default mock data provided in the form of a grid
 2. While these images would be loading, you can see a loader as a placeholder
