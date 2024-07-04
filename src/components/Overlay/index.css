@@ -9,3 +9,13 @@
   align-items: center;
   z-index: 999;
 }
+
+.close-btn {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 25px;
+  cursor: pointer;
+  z-index: 2;
+  font-weight: 600;
+}
