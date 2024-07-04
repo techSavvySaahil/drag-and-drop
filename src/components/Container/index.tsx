@@ -126,7 +126,7 @@ const Container = () => {
 
       </div>
       {imgShownInOverlay && <Overlay>
-        <Image index={0} title={imgShownInOverlay.title} url={imgShownInOverlay.url} width={500} height={500} customRef={null} />
+        <Image index={0} title={imgShownInOverlay.title} url={imgShownInOverlay.url} width="80%" height="80%" customRef={null} />
       </Overlay>}
       {isSavingData && <Overlay><ScaleLoader /></Overlay>}
     </>

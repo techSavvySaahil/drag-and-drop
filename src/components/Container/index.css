@@ -11,8 +11,14 @@
   font-size: 14px;
 }
 
-@media screen and (max-width: 667px) {
+@media screen and (max-width: 1023px) {
   .images-grid {
     grid-template-columns: auto auto;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .images-grid {
+    grid-template-columns: auto;
   }
 }
