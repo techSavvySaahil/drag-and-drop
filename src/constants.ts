@@ -1,3 +1,3 @@
-export const ItemType = {
-  ImgBox: "ImageBox"
+export const ItemTypes = {
+  ImgBox: "ImageBox",
 };

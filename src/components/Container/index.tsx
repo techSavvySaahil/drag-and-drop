@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import { mockData } from "../../__mocks__";
 import ImageWrapper from "../ImageWrapper";
 import "./index.css";
 import Overlay from "../Overlay";
@@ -7,16 +6,17 @@ import Image from "../Image";
 import { mockData } from "../../__mocks__";
 import { ScaleLoader } from "react-spinners";
 import Moment from 'react-moment';
+import type { ItemType } from "../../helpers/commonTypes";
 
 const Container = () => {
   // state containing list of images 
-  const [imageList, setImageList] = useState([]);
+  const [imageList, setImageList] = useState<ItemType[] | []>([]);
 
   // state for showing image in overlay
-  const [imgShownInOverlay, setImgInOverlay] = useState(null);
+  const [imgShownInOverlay, setImgInOverlay] = useState<ItemType | null>(null);
 
   // state for implementing throttling
-  const [timeoutId, setTimeoutId] = useState(null);
+  const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
 
   // state for making sure setTimeout doesn't take stale
   // value of imageList state
@@ -71,7 +71,8 @@ const Container = () => {
     //     setImageList(response);
     //   })
     //   .catch(() => {
-    const data = JSON.parse(window.localStorage.getItem("imageData"));
+    const imgData = window.localStorage.getItem("imageData");
+    const data = imgData ? JSON.parse(imgData) : [];
     if (data && data.length) setImageList(data);
     else setImageList(mockData);
     // })
@@ -88,13 +89,14 @@ const Container = () => {
     // })
   };
 
-  const checkKey = (e) => {
-    if (e.keyCode === 27) {
+  const checkKey = (e: KeyboardEvent) => {
+    console.log("e.key", e.key);
+    if (e.key === "Escape") {
       setImgInOverlay(null);
     }
   }
 
-  const handleDrop = (item, newPosition) => {
+  const handleDrop = (item: ItemType, newPosition: number) => {
     setFirstChangeDone(true);
     setImageList(images => {
       const newImageList = [...images];
@@ -107,8 +109,8 @@ const Container = () => {
     })
   }
 
-  const showInOverlay = (e) => {
-    const { attributes } = e.target;
+  const showInOverlay = (e: React.MouseEvent) => {
+    const { attributes } = e.target as HTMLImageElement;
     const position = attributes["data-position"];
     if (position?.value) setImgInOverlay(imageList[position.value]);
   }
@@ -118,7 +120,7 @@ const Container = () => {
       <p className="last-saved-text">Last saved: <Moment fromNow>{lastSavedTimestamp}</Moment></p>
       <div className="images-grid" onClick={showInOverlay}>
         {
-          imageList.map((imgObj, index) => {
+          imageList.map((imgObj: ItemType, index: number) => {
             const { title, position, url } = imgObj;
             return <ImageWrapper key={index} title={title} url={url} position={position} handleDrop={handleDrop} />
           })

@@ -1,6 +1,11 @@
+import { ReactElement, ReactHTMLElement } from "react";
 import "./index.css";
 
-const Overlay = ({ children, onClose = () => { } }) => (
+type OverlayType = {
+  onClose?: () => void,
+  children: ReactElement
+}
+const Overlay = ({ children, onClose = () => { } }: OverlayType) => (
   <div className="overlay">
     <p className="close-btn" onClick={onClose}>x</p>
     {children}

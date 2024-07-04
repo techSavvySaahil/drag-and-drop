@@ -1,27 +1,27 @@
 import { useDrag, useDrop } from "react-dnd";
-import { ItemType } from "../../constants";
+import { ItemTypes } from "../../constants";
 import Image from "../Image";
+import type { ItemType } from "../../helpers/commonTypes";
 
-type ImageObjType = {
-  title: string,
-  url: string,
-  position: number
+
+type ImageObjType = ItemType & {
+  handleDrop: (item: ItemType, position: number) => void
 }
 
-const ImageWrapper = ({ title, url, position, handleDrop }) => {
+const ImageWrapper = ({ title, url, position, handleDrop }: ImageObjType) => {
   const [, drag] = useDrag(() => ({
-    type: ItemType.ImgBox,
+    type: ItemTypes.ImgBox,
     item: { title, url, position }
   }));
   const [, drop] = useDrop(() => ({
-    accept: ItemType.ImgBox,
+    accept: ItemTypes.ImgBox,
     drop: (item: ImageObjType) => {
       handleDrop(item, position);
     }
   }));
 
   return (
-    <div className="images-wrapper" ref={drop} id={position}>
+    <div className="images-wrapper" ref={drop} id={`position`}>
       <Image index={position} customRef={drag} url={url} width={300} height={300} title={title} />
     </div>
   );

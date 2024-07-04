@@ -1,8 +1,18 @@
 import { useState } from "react";
+import { type ConnectDragSource } from "react-dnd";
 import { BarLoader } from "react-spinners";
 import "./index.css"
 
-const Image = ({ index, title, url, width, height, customRef }) => {
+type ImagePropType = {
+  index: number,
+  title: string,
+  url: string,
+  width: number | string,
+  height: number | string,
+  customRef: ConnectDragSource | null
+}
+
+const Image = ({ index, title, url, width, height, customRef }: ImagePropType) => {
   const [isLoading, setLoading] = useState(true);
   return (
     <div className="wrap">
